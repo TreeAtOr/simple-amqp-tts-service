@@ -1,0 +1,18 @@
+services:
+  tss:
+    image: ttsservice
+    ports:
+      - "8000:8000"
+    volumes:
+      - ".:/root/.cache/torch/hub/"
+    links:
+      - amqp
+    env_file: .env
+  
+  amqp:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    hostname: rabbit
+      
